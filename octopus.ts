@@ -243,7 +243,7 @@ namespace Octopus {
     * TODO: Judge whether the button is pressed
     * @param UserPin DigitalPin, eg: DigitalPin.P1
     */
-    //% blockId=button block="Button %UserPin is pressed"
+    //% blockId=buttonSensor block="Button %UserPin is pressed"
     //% subcategory=Sensor group="Digital" color=#EA5532
     export function buttonSensor(UserPin: DigitalPin): boolean {
         let pin = UserPin
@@ -259,7 +259,7 @@ namespace Octopus {
     * TODO: Judge whether the button is pressed
     * @param UserPin DigitalPin, eg: DigitalPin.P1
     */
-    //% blockId=button block="Button %UserPin on %ButtonType"
+    //% blockId=buttonevent block="Button %UserPin on %ButtonType"
     //% subcategory=Sensor group="Digital" color=#EA5532
     export function buttonEvent(UserPin: DigitalPin,event: ButtonType,handler:Action): void {
         pins.onPulsed(UserPin, <number>event, handler);
