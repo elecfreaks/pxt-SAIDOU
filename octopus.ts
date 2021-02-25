@@ -191,6 +191,12 @@ namespace Octopus {
         //% block="NC|Open NO|Close"
         Off
     }
+    export enum ButtonType {
+        //% block="pressed"
+        down = PulseValue.High,
+        //% block="released"
+        up = PulseValue.Low
+    }
     export enum NeoPixelColors {
         //% block=red
         Red = 0xFF0000,
@@ -248,6 +254,15 @@ namespace Octopus {
         else{
             return false
         }
+    }
+        /**
+    * TODO: Judge whether the button is pressed
+    * @param UserPin DigitalPin, eg: DigitalPin.P1
+    */
+    //% blockId=button block="Button %UserPin on %ButtonType"
+    //% subcategory=Sensor group="Digital" color=#EA5532
+    export function buttonEvent(UserPin: DigitalPin,event: ButtonType,handler:Action): void {
+        pins.onPulsed(UserPin, <number>event, handler);
     }
     /**
     * TODO: get light intensity(lux)
