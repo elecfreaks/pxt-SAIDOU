@@ -2,7 +2,7 @@
 * Functions to Octopus sensor by ELECFREAKS Co.,Ltd.
 */
 //% color=#00B1ED  icon="\uf005" block="Octopus" blockId="Octopus"
-//% groups='["Digital", "Analog", "IIC Port","OLED","Neopixel"]'
+//% groups='["Digital", "Analog", "IIC Port","OLED","Neopixel","7-Seg 4-Dig LED Nixietube"]'
 namespace Octopus {
     /////////////////////OLED///////////////////////////////
     let firstoledinit = true
