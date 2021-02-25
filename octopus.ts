@@ -158,6 +158,12 @@ namespace Octopus {
         oledcmd(0xAF);  // Set display On
         oledClear();
     }
+    ////////////////////////////////TM 1637/////////////////
+    let TM1637_CMD1 = 0x40;
+    let TM1637_CMD2 = 0xC0;
+    let TM1637_CMD3 = 0x80;
+    let _SEGMENTS = [0x3F, 0x06, 0x5B, 0x4F, 0x66, 0x6D, 0x7D, 0x07, 0x7F, 0x6F, 0x77, 0x7C, 0x39, 0x5E, 0x79, 0x71];
+    //////////////////enum/////////////////////
     export enum Distance_Unit_List {
         //% block="cm" 
         Distance_Unit_cm,
@@ -177,6 +183,13 @@ namespace Octopus {
 
         //% block="◌ ◌" enumval=3
         Tracking_State_3
+    }
+    export enum RelayStateList {
+        //% block="NC|Close NO|Open"
+        On,
+
+        //% block="NC|Open NO|Close"
+        Off
     }
     export enum NeoPixelColors {
         //% block=red
@@ -339,6 +352,48 @@ namespace Octopus {
             return true;
         } else return false;
     }
+    /**
+    * get water level value (0~100)
+    * @param waterlevelpin describe parameter here, eg: AnalogUserPin.J1
+    */
+    //% blockId="readwaterLevel" block="Water level sensor %UserPin value(0~100)"
+    //% UserPin.fieldEditor="gridpicker"
+    //% UserPin.fieldOptions.columns=2
+    //% subcategory=Sensor color=#E2C438 group="Analog"
+    export function waterLevel(UserPin: AnalogPin): number {
+        let voltage = 0, waterlevel = 0;
+        voltage = pins.map(
+            pins.analogReadPin(UserPin),
+            50,
+            600,
+            0,
+            100
+        );
+        if(voltage<0){
+            voltage = 0
+        }
+        waterlevel = voltage;
+        return Math.round(waterlevel)
+    }
+    /**
+    * toggle Relay
+    */
+    //% blockId=Relay block="Relay %UserPin toggle to %Relaystate"
+    //% UserPin.fieldEditor="gridpicker"
+    //% UserPin.fieldOptions.columns=2
+    //% Relaystate.fieldEditor="gridpicker"
+    //% Relaystate.fieldOptions.columns=1
+    //% subcategory=Excute group="Digital" color=#EA5532
+    export function Relay(UserPin: DigitalPin, Relaystate: RelayStateList): void {
+        switch (Relaystate) {
+            case RelayStateList.On:
+                pins.digitalWritePin(UserPin, 0)
+                break;
+            case RelayStateList.Off:
+                pins.digitalWritePin(UserPin, 1)
+                break;
+        }
+    }
     //% block="clear display" color=#00B1ED
     //% subcategory=Display group="OLED"
     export function oledClear() {
@@ -386,6 +441,161 @@ namespace Octopus {
         for (let i = text.length; i < 16; i++) {
             setText(line, i);
             putChar(" ");
+        }
+    }
+/**
+   * Create a new driver Grove - 4-Digit Display
+   * @param clkPin value of clk pin number
+   * @param dataPin value of data pin number
+   */
+    //% blockId=grove_tm1637_create block="connect 4-Digit Display DIO %UserPin_dio CLK %UserPin_clk"
+    //% subcategory=Display group="7-Seg 4-Dig LED Nixietube" blockSetVariable=display color=#EA5532
+    export function tm1637Create(UserPin_dio: DigitalPin,UserPin_clk: DigitalPin, intensity: number = 7, count: number = 4): TM1637LEDs {
+        let display = new TM1637LEDs();
+        display.clk = UserPin_clk
+        display.dio = UserPin_dio
+        if ((count < 1) || (count > 5)) count = 4;
+        display.count = count;
+        display.brightness = intensity;
+        display.init();
+        return display;
+    }
+    export class TM1637LEDs {
+        buf: Buffer;
+        clk: DigitalPin;
+        dio: DigitalPin;
+        _ON: number;
+        brightness: number;
+        count: number;  // number of LEDs
+        /**
+         * initial TM1637
+         */
+        init(): void {
+            pins.digitalWritePin(this.clk, 0);
+            pins.digitalWritePin(this.dio, 0);
+            this._ON = 8;
+            this.buf = pins.createBuffer(this.count);
+            this.clear();
+        }
+        /**
+         * Start 
+         */
+        _start() {
+            pins.digitalWritePin(this.dio, 0);
+            pins.digitalWritePin(this.clk, 0);
+        }
+        /**
+         * Stop
+         */
+        _stop() {
+            pins.digitalWritePin(this.dio, 0);
+            pins.digitalWritePin(this.clk, 1);
+            pins.digitalWritePin(this.dio, 1);
+        }
+        /**
+         * send command1
+         */
+        _write_data_cmd() {
+            this._start();
+            this._write_byte(TM1637_CMD1);
+            this._stop();
+        }
+        /**
+         * send command3
+         */
+        _write_dsp_ctrl() {
+            this._start();
+            this._write_byte(TM1637_CMD3 | this._ON | this.brightness);
+            this._stop();
+        }
+        /**
+         * send a byte to 2-wire interface
+         */
+        _write_byte(b: number) {
+            for (let i = 0; i < 8; i++) {
+                pins.digitalWritePin(this.dio, (b >> i) & 1);
+                pins.digitalWritePin(this.clk, 1);
+                pins.digitalWritePin(this.clk, 0);
+            }
+            pins.digitalWritePin(this.clk, 1);
+            pins.digitalWritePin(this.clk, 0);
+        }
+        _intensity(val: number = 7) {
+            this._ON = 8;
+            this.brightness = val - 1;
+            this._write_data_cmd();
+            this._write_dsp_ctrl();
+        }
+        /**
+         * set data to TM1637, with given bit
+         */
+        _dat(bit: number, dat: number) {
+            this._write_data_cmd();
+            this._start();
+            this._write_byte(TM1637_CMD2 | (bit % this.count))
+            this._write_byte(dat);
+            this._stop();
+            this._write_dsp_ctrl();
+        }
+        /**
+         * Show a single number from 0 to 9 at a specified digit of Grove - 4-Digit Display
+         * @param dispData value of number
+         * @param bitAddr value of bit number
+         */
+        //% blockId=grove_tm1637_display_bit block="%display|show single number|%num|at digit|%bit"
+        //% subcategory=Display group="7-Seg 4-Dig LED Nixietube" color=#EA5532
+        //% bit.defl=1 bit.min=0 bit.max=9
+        showbit(num: number = 5, bit: number = 0) {
+            bit = Math.map(bit, 4, 1, 0, 3)
+            this.buf[bit % this.count] = _SEGMENTS[num % 16]
+            this._dat(bit, _SEGMENTS[num % 16])
+        }
+        /**
+         * Show a 4 digits number on display
+         * @param dispData value of number
+         */
+        //% blockId=grove_tm1637_display_number block="%display|show number|%num"
+        //% subcategory=Display group="7-Seg 4-Dig LED Nixietube" color=#EA5532
+        showNumber(num: number) {
+            if (num < 0) {
+                num = -num
+                this.showbit(Math.idiv(num, 1000) % 10)
+                this.showbit(num % 10, 1)
+                this.showbit(Math.idiv(num, 10) % 10, 2)
+                this.showbit(Math.idiv(num, 100) % 10, 3)
+                this._dat(0, 0x40) // '-'
+            }
+            else {
+                this.showbit(Math.idiv(num, 1000) % 10)
+                this.showbit(num % 10, 1)
+                this.showbit(Math.idiv(num, 10) % 10, 2)
+                this.showbit(Math.idiv(num, 100) % 10, 3)
+            }
+        }
+        /**
+         * show or hide dot point. 
+         * @param bit is the position, eg: 1
+         * @param show is show/hide dp, eg: true
+         */
+        //% blockId="TM1637_showDP" block="%display|DotPoint at %bit|show $show"
+        //% show.shadow="toggleOnOff"
+        //% subcategory=Display group="7-Seg 4-Dig LED Nixietube" color=#EA5532
+        showDP(bit: number = 1, show: boolean = true) {
+            bit = Math.map(bit, 4, 1, 0, 3)
+            bit = bit % this.count
+            if (show) this._dat(bit, this.buf[bit] | 0x80)
+            else this._dat(bit, this.buf[bit] & 0x7F)
+        }
+        /**
+         * clear LED. 
+         */
+        //% blockId="TM1637_clear" block="clear display %display"
+        //% subcategory=Display group="7-Seg 4-Dig LED Nixietube" color=#EA5532
+        clear() {
+            for (let i = 0; i < this.count; i++) {
+                this._dat(i, 0)
+                this.buf[i] = 0
+            }
         }
     }
     //% shim=sendBufferAsm
