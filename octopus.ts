@@ -213,21 +213,21 @@ namespace Octopus {
     }
     /**
     * TODO: Get the value of the potentiometer(0~1023)
-    * @param Rjpin AnalogPin, eg: AnalogPin.P1
+    * @param UserPin AnalogPin, eg: AnalogPin.P1
     */
-    //% blockId="potentiometer" block="Trimpot %Rjpin analog value"
+    //% blockId="potentiometer" block="Trimpot %UserPin analog value"
     //% subcategory=Sensor color=#E2C438 group="Analog"
-    export function trimpotSensor(Rjpin: AnalogPin): number {
-        return pins.analogReadPin(Rjpin)
+    export function trimpotSensor(UserPin: AnalogPin): number {
+        return pins.analogReadPin(UserPin)
     }
     /**
     * TODO: Judge whether the button is pressed
-    * @param Rjpin DigitalPin, eg: DigitalPin.P1
+    * @param UserPin DigitalPin, eg: DigitalPin.P1
     */
-    //% blockId=button block="Button %Rjpin is pressed"
+    //% blockId=button block="Button %UserPin is pressed"
     //% subcategory=Sensor group="Digital" color=#EA5532
-    export function buttonSensor(Rjpin: DigitalPin): boolean {
-        let pin = Rjpin
+    export function buttonSensor(UserPin: DigitalPin): boolean {
+        let pin = UserPin
         pins.setPull(pin, PinPullMode.PullUp)
         if (pins.digitalReadPin(pin) == 0) {
             return true
@@ -238,14 +238,14 @@ namespace Octopus {
     }
     /**
     * TODO: get light intensity(lux)
-    * @param Rjpin AnalogPin, eg: AnalogPin.P1
+    * @param UserPin AnalogPin, eg: AnalogPin.P1
     */
-    //% blockId="lightSensor" block="Light sensor %Rjpin light intensity(lux)"
+    //% blockId="lightSensor" block="Light sensor %UserPin light intensity(lux)"
     //% subcategory=Sensor color=#E2C438 group="Analog"
-    export function lightSensor(Rjpin: AnalogPin): number {
+    export function lightSensor(UserPin: AnalogPin): number {
         let voltage = 0, lightintensity = 0;
         for (let index = 0; index < 100; index++) {
-            voltage = voltage + pins.analogReadPin(Rjpin)
+            voltage = voltage + pins.analogReadPin(UserPin)
         }
         voltage = voltage / 100
         if (voltage < 200) {
@@ -261,24 +261,24 @@ namespace Octopus {
     }
     /**
     * TODO: get distance
-    * @param Rjpin_t Trig pin DigitalPin, eg: DigitalPin.P1
-    * @param Rjpin_e Echo pin DigitalPin, eg: DigitalPin.P2
+    * @param UserPin Trig pin DigitalPin, eg: DigitalPin.P1
+    * @param UserPin_e Echo pin DigitalPin, eg: DigitalPin.P2
     * @param distance_unit unit, eg: Distance_Unit_List.Distance_Unit_cm
     */
-    //% blockId=sonarbit block="Ultrasonic sensor Trig:%Rjpin_t echo:%Rjpin_e distance %distance_unit"
+    //% blockId=sonarbit block="Ultrasonic sensor %UserPin distance %distance_unit"
     //% distance_unit.fieldEditor="gridpicker"
     //% distance_unit.fieldOptions.columns=2
     //% subcategory=Sensor group="Digital" color=#EA5532
-    export function ultrasoundSensor(Rjpin_t:DigitalPin,Rjpin_e: DigitalPin, distance_unit: Distance_Unit_List): number {
-        pins.setPull(Rjpin_t, PinPullMode.PullNone)
-        pins.digitalWritePin(Rjpin_t, 0)
+    export function ultrasoundSensor(UserPin:DigitalPin,distance_unit: Distance_Unit_List): number {
+        pins.setPull(UserPin, PinPullMode.PullNone)
+        pins.digitalWritePin(UserPin, 0)
         control.waitMicros(2)
-        pins.digitalWritePin(Rjpin_t, 1)
+        pins.digitalWritePin(UserPin, 1)
         control.waitMicros(10)
-        pins.digitalWritePin(Rjpin_t, 0)
+        pins.digitalWritePin(UserPin, 0)
 
         // read pulse
-        let d = pins.pulseIn(Rjpin_e, PulseValue.High, 25000)
+        let d = pins.pulseIn(UserPin, PulseValue.High, 25000)
         let distance = d * 9 / 6 / 58
 
         if (distance > 400) {
@@ -297,38 +297,38 @@ namespace Octopus {
     }
     /**
     * TODO: Drive motor fan
-    * @param Rjpin AnalogPin, eg: AnalogPin.P1
+    * @param UserPin AnalogPin, eg: AnalogPin.P1
     * @param fanstate Switch status, eg: true
     * @param speed Motor speed, eg: 80
     */
-    //% blockId=fans block="Motor fan %Rjpin toggle to $fanstate || speed %speed \\%"
+    //% blockId=fans block="Motor fan %UserPin toggle to $fanstate || speed %speed \\%"
     //% fanstate.shadow="toggleOnOff"
     //% subcategory=Excute group="Digital" color=#EA5532
     //% speed.min=0 speed.max=100
     //% expandableArgumentMode="toggle"
-    export function motorFan(Rjpin: AnalogPin, fanstate: boolean, speed: number = 100): void {
+    export function motorFan(UserPin: AnalogPin, fanstate: boolean, speed: number = 100): void {
         if (fanstate) {
-            pins.analogSetPeriod(Rjpin, 100)
-            pins.analogWritePin(Rjpin, Math.map(speed, 0, 100, 0, 1023))
+            pins.analogSetPeriod(UserPin, 100)
+            pins.analogWritePin(UserPin, Math.map(speed, 0, 100, 0, 1023))
         }
         else {
-            pins.analogWritePin(Rjpin, 0)
+            pins.analogWritePin(UserPin, 0)
             speed = 0
         }
     }
     /**
     * TODO: Acquisition of line inspection sensor
-    * @param Rjpin_l Left sensor port, eg: DigitalPin.P1
-    * @param Rjpin_r Right sensor port, eg: DigitalPin.P2
+    * @param UserPin_l Left sensor port, eg: DigitalPin.P1
+    * @param UserPin_r Right sensor port, eg: DigitalPin.P2
     * @param state state, eg: TrackingStateType.Tracking_State_0
     */
     //% subcategory=Sensor group="Digital" color=#EA5532
-    //% blockId=tracking block="Line-tracking sensor Left:%Rjpin Right:%Rjpin_r is %state"
-    export function trackingSensor(Rjpin_l: DigitalPin, Rjpin_r: DigitalPin,state: TrackingStateType): boolean {
-        pins.setPull(Rjpin_l, PinPullMode.PullUp)
-        pins.setPull(Rjpin_r, PinPullMode.PullUp)
-        let lsensor = pins.digitalReadPin(Rjpin_l)
-        let rsensor = pins.digitalReadPin(Rjpin_r)
+    //% blockId=tracking block="Line-tracking sensor Left:%UserPin Right:%UserPin_r is %state"
+    export function trackingSensor(UserPin_l: DigitalPin, UserPin_r: DigitalPin,state: TrackingStateType): boolean {
+        pins.setPull(UserPin_l, PinPullMode.PullUp)
+        pins.setPull(UserPin_r, PinPullMode.PullUp)
+        let lsensor = pins.digitalReadPin(UserPin_l)
+        let rsensor = pins.digitalReadPin(UserPin_r)
         if (lsensor == 0 && rsensor == 0 && state == TrackingStateType.Tracking_State_0) {
             return true;
         } else if (lsensor == 0 && rsensor == 1 && state == TrackingStateType.Tracking_State_1) {
@@ -388,7 +388,7 @@ namespace Octopus {
             putChar(" ");
         }
     }
-//% shim=sendBufferAsm
+    //% shim=sendBufferAsm
     function sendBuffer(buf: Buffer, pin: DigitalPin) {
     }
     export class Strip {
@@ -643,12 +643,12 @@ namespace Octopus {
      * @param pin the pin where the neopixel is connected.
      * @param numleds number of leds in the strip, eg: 24,30,60,64
      */
-    //% blockId="neopixel_create" block="NeoPixel at pin %Rjpin|with %numleds|leds as %mode"
+    //% blockId="neopixel_create" block="NeoPixel at pin %UserPin|with %numleds|leds as %mode"
     //% weight=90 color=#EA5532
     //% parts="neopixel"
     //% trackArgs=0,2
     //% blockSetVariable=strip subcategory=Display group="Neopixel"
-    export function create(Rjpin: DigitalPin, numleds: number, mode: NeoPixelMode): Strip {
+    export function create(UserPin: DigitalPin, numleds: number, mode: NeoPixelMode): Strip {
         let strip = new Strip();
         let stride = mode === NeoPixelMode.RGBW ? 4 : 3;
         strip.buf = pins.createBuffer(numleds * stride);
@@ -657,7 +657,7 @@ namespace Octopus {
         strip._mode = mode;
         strip._matrixWidth = 0;
         strip.setBrightness(50)
-        strip.setPin(Rjpin)
+        strip.setPin(UserPin)
         return strip;
     }
 
