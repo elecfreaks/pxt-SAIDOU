@@ -463,7 +463,7 @@ namespace Octopus {
    * @param clkPin value of clk pin number
    * @param dataPin value of data pin number
    */
-    //% blockId=grove_tm1637_create block="connect Nixietube |DIO %UserPin_dio |CLK %UserPin_clk"
+    //% blockId=grove_tm1637_create block="connect Nixietube|DIO %UserPin_dio|CLK %UserPin_clk"
     //% subcategory=Display group="7-Seg 4-Dig LED Nixietube" blockSetVariable=display color=#EA5532
     export function tm1637Create(UserPin_dio: DigitalPin,UserPin_clk: DigitalPin, intensity: number = 7, count: number = 4): TM1637LEDs {
         let display = new TM1637LEDs();
