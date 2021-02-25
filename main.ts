@@ -79,8 +79,6 @@ namespace WuKong {
         }
     }
 
-
-
 	/**
     * TODO: Set the brightness of on-board LED lamp.
     * @param light brightness, eg: 100
@@ -100,7 +98,6 @@ namespace WuKong {
         buff[1] = 160;
         pins.i2cWriteBuffer(board_address, buff);
     }
-
 
 	/**
      * TODO: Set the speed of M1 or M2 motor. 
@@ -139,6 +136,7 @@ namespace WuKong {
                 break;
         }
     }
+
 	/*
      * TODO: Set both of M1 and M2 motors speed. 
      * @param m1speed M1 motor speed , eg: 100
@@ -162,6 +160,7 @@ namespace WuKong {
     export function stopMotor(motor: MotorList): void {
         setMotorSpeed(motor, 0)
     }
+
 	/*
      * TODO: Stop all motors, including M1 and M2.
      */
@@ -191,6 +190,7 @@ namespace WuKong {
         buf[3] = 0;
         pins.i2cWriteBuffer(board_address, buf);
     }
+
     /***************************************************Mecanum wheel car******************************************/
     let LeftFront_def = ServoList.S0
     let LeftRear_def = ServoList.S1
@@ -262,6 +262,7 @@ namespace WuKong {
         RightFront_def = RightFront
         RightRear_def = RightRear
     }
+
     /**
     * TODO: Set servo speed
     */
@@ -328,6 +329,7 @@ namespace WuKong {
         buf[3] = 0;
         pins.i2cWriteBuffer(board_address, buf);
     }
+
     /**
     * TODO: Set side servo speed
     */
@@ -345,6 +347,7 @@ namespace WuKong {
                 break;
         }
     }
+
     /**
    * TODO: Set car runs direction
    */
@@ -417,6 +420,7 @@ namespace WuKong {
                 break;
         }
     }
+
     /**
     * TODO: Set Mecanum car Stop
     */
@@ -428,6 +432,7 @@ namespace WuKong {
         setServoAngel(RightFront_def, 90)
         setServoAngel(RightRear_def, 90)
     }
+
     /**
    * TODO: Set car spin 
    */
@@ -458,6 +463,7 @@ namespace WuKong {
                 break;
         }
     }
+
     /**
     * TODO: Set car drift
     */
@@ -481,4 +487,5 @@ namespace WuKong {
                 break;
         }
     }
+
 }
