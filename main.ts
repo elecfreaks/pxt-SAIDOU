@@ -182,27 +182,7 @@ namespace wuKong {
     //% angle.shadow="protractorPicker"
     export function setServoAngel(servo: ServoList, angel: number): void {
         let buf = pins.createBuffer(4);
-        if (servo == 0) {
-            buf[0] = 0x03;
-        }
-        if (servo == 1) {
-            buf[0] = 0x04;
-        }
-        if (servo == 2) {
-            buf[0] = 0x05;
-        }
-        if (servo == 3) {
-            buf[0] = 0x06;
-        }
-        if (servo == 4) {
-            buf[0] = 0x07;
-        }
-        if (servo == 5) {
-            buf[0] = 0x08;
-        }
-        if (servo == 6) {
-            buf[0] = 0x09;
-        }
+        buf[0] = 0x03 + servo
         if (servo == 7) {
             buf[0] = 0x10;
         }
@@ -319,133 +299,25 @@ namespace wuKong {
         }
         switch (wheel) {
             case 0:
-                if (LeftFront_def == 0) {
-                    buf[0] = 0x03;
-                    break;
-                }
-                if (LeftFront_def == 1) {
-                    buf[0] = 0x04;
-                    break;
-                }
-                if (LeftFront_def == 2) {
-                    buf[0] = 0x05;
-                    break;
-                }
-                if (LeftFront_def == 3) {
-                    buf[0] = 0x06;
-                    break;
-                }
-                if (LeftFront_def == 4) {
-                    buf[0] = 0x07;
-                    break;
-                }
-                if (LeftFront_def == 5) {
-                    buf[0] = 0x08;
-                    break;
-                }
-                if (LeftFront_def == 6) {
-                    buf[0] = 0x09;
-                    break;
-                }
+                buf[0] = 0x03 + LeftFront_def
                 if (LeftFront_def == 7) {
                     buf[0] = 0x10;
                     break;
                 }
             case 1:
-                if (LeftRear_def == 0) {
-                    buf[0] = 0x03;
-                    break;
-                }
-                if (LeftRear_def == 1) {
-                    buf[0] = 0x04;
-                    break;
-                }
-                if (LeftRear_def == 2) {
-                    buf[0] = 0x05;
-                    break;
-                }
-                if (LeftRear_def == 3) {
-                    buf[0] = 0x06;
-                    break;
-                }
-                if (LeftRear_def == 4) {
-                    buf[0] = 0x07;
-                    break;
-                }
-                if (LeftRear_def == 5) {
-                    buf[0] = 0x08;
-                    break;
-                }
-                if (LeftRear_def == 6) {
-                    buf[0] = 0x09;
-                    break;
-                }
+                buf[0] = 0x03 + LeftRear_def
                 if (LeftRear_def == 7) {
                     buf[0] = 0x10;
                     break;
                 }
             case 2:
-                if (RightFront_def == 0) {
-                    buf[0] = 0x03;
-                    break;
-                }
-                if (RightFront_def == 1) {
-                    buf[0] = 0x04;
-                    break;
-                }
-                if (RightFront_def == 2) {
-                    buf[0] = 0x05;
-                    break;
-                }
-                if (RightFront_def == 3) {
-                    buf[0] = 0x06;
-                    break;
-                }
-                if (RightFront_def == 4) {
-                    buf[0] = 0x07;
-                    break;
-                }
-                if (RightFront_def == 5) {
-                    buf[0] = 0x08;
-                    break;
-                }
-                if (RightFront_def == 6) {
-                    buf[0] = 0x09;
-                    break;
-                }
+                buf[0] = 0x03 + RightFront_def
                 if (RightFront_def == 7) {
                     buf[0] = 0x10;
                     break;
                 }
             case 3:
-                if (RightRear_def == 0) {
-                    buf[0] = 0x03;
-                    break;
-                }
-                if (RightRear_def == 1) {
-                    buf[0] = 0x04;
-                    break;
-                }
-                if (RightRear_def == 2) {
-                    buf[0] = 0x05;
-                    break;
-                }
-                if (RightRear_def == 3) {
-                    buf[0] = 0x06;
-                    break;
-                }
-                if (RightRear_def == 4) {
-                    buf[0] = 0x07;
-                    break;
-                }
-                if (RightRear_def == 5) {
-                    buf[0] = 0x08;
-                    break;
-                }
-                if (RightRear_def == 6) {
-                    buf[0] = 0x09;
-                    break;
-                }
+                buf[0] = 0x03 + RightRear_def
                 if (RightRear_def == 7) {
                     buf[0] = 0x10;
                     break;
