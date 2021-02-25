@@ -228,7 +228,7 @@ namespace Octopus {
     * TODO: Get the value of the potentiometer(0~1023)
     * @param UserPin AnalogPin, eg: AnalogPin.P1
     */
-    //% blockId="potentiometer" block="Trimpot %UserPin analog value"
+    //% blockId="potentiometer" block="Trimpot %UserPin analog value(0~1023)"
     //% subcategory=Sensor color=#E2C438 group="Analog"
     export function trimpotSensor(UserPin: AnalogPin): number {
         return pins.analogReadPin(UserPin)
