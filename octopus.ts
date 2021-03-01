@@ -737,6 +737,7 @@ namespace Octopus {
         clear(): void {
             const stride = this._mode === NeoPixelMode.RGBW ? 4 : 3;
             this.buf.fill(0, this.start * stride, this._length * stride);
+            this.show();
         }
 
         /**
