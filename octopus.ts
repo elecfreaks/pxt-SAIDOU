@@ -573,21 +573,40 @@ namespace Octopus {
         //% blockId=grove_tm1637_display_number block="%display|show number|%num"
         //% subcategory=Display group="7-Seg 4-Dig LED Nixietube" color=#EA5532
         showNumber(num: number) {
+            let negativedp = 2
             if(num != this.lastnum){
                 this.lastnum = num
                 if (num < 0) {
                     num = -num
+                    if(num > 9){
+                        this.showbit(Math.idiv(num, 10) % 10, 2)  
+                        negativedp = 1
+                        if(num > 99){
+                            this.showbit(Math.idiv(num, 10) % 10, 3)  
+                            negativedp = 0
+                        }
+                    }
                     //this.showbit(Math.idiv(num, 1000) % 10)
-                    this.showbit(num % 10, 1)
-                    this.showbit(Math.idiv(num, 10) % 10, 2)
-                    this.showbit(Math.idiv(num, 100) % 10, 3)
-                    this._dat(0, 0x40) // '-'
+                    //this.showbit(num % 10, 1)
+                    //this.showbit(Math.idiv(num, 10) % 10, 2)
+                    this.showbit(num % 10, 1) 
+                    this._dat(negativedp, 0x40) // '-'
                 }
                 else {
-                    this.showbit(Math.idiv(num, 1000) % 10, 0)
-                    this.showbit(num % 10, 1)
-                    this.showbit(Math.idiv(num, 10) % 10, 2)
-                    this.showbit(Math.idiv(num, 100) % 10, 3)
+                    if(num > 9){
+                        this.showbit(Math.idiv(num, 10) % 10, 2)   
+                        if(num >99){
+                            this.showbit(Math.idiv(num, 100) % 10, 3)
+                            if(num>999){
+                                 this.showbit(Math.idiv(num, 1000) % 10, 0)
+                            }
+                        }
+                    }
+                    //this.showbit(Math.idiv(num, 1000) % 10, 0)
+                    //this.showbit(num % 10, 1)
+                    //this.showbit(Math.idiv(num, 10) % 10, 2)
+                    this.showbit(num % 10, 1)    
+                    
                 }
             }
             else{}
