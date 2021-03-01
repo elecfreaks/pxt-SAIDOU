@@ -580,7 +580,7 @@ namespace Octopus {
                     this.showbit(Math.idiv(num, 1000) % 10)
                     this.showbit(num % 10, 1)
                     this.showbit(Math.idiv(num, 10) % 10, 2)
-                    this.showbit(Math.idiv(num, 100) % 10, 3)
+                    //this.showbit(Math.idiv(num, 100) % 10, 3)
                     this._dat(0, 0x40) // '-'
                 }
                 else {
