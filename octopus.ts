@@ -482,6 +482,7 @@ namespace Octopus {
         _ON: number;
         brightness: number;
         count: number;  // number of LEDs
+        lastnum:number;
         /**
          * initial TM1637
          */
@@ -572,20 +573,24 @@ namespace Octopus {
         //% blockId=grove_tm1637_display_number block="%display|show number|%num"
         //% subcategory=Display group="7-Seg 4-Dig LED Nixietube" color=#EA5532
         showNumber(num: number) {
-            if (num < 0) {
-                num = -num
-                this.showbit(Math.idiv(num, 1000) % 10)
-                this.showbit(num % 10, 1)
-                this.showbit(Math.idiv(num, 10) % 10, 2)
-                this.showbit(Math.idiv(num, 100) % 10, 3)
-                this._dat(0, 0x40) // '-'
+            if(num != this.lastnum){
+                this.lastnum = num
+                if (num < 0) {
+                    num = -num
+                    this.showbit(Math.idiv(num, 1000) % 10)
+                    this.showbit(num % 10, 1)
+                    this.showbit(Math.idiv(num, 10) % 10, 2)
+                    this.showbit(Math.idiv(num, 100) % 10, 3)
+                    this._dat(0, 0x40) // '-'
+                }
+                else {
+                    this.showbit(Math.idiv(num, 1000) % 10, 0)
+                    this.showbit(num % 10, 1)
+                    this.showbit(Math.idiv(num, 10) % 10, 2)
+                    this.showbit(Math.idiv(num, 100) % 10, 3)
+                }
             }
-            else {
-                this.showbit(Math.idiv(num, 1000) % 10, 0)
-                this.showbit(num % 10, 1)
-                this.showbit(Math.idiv(num, 10) % 10, 2)
-                this.showbit(Math.idiv(num, 100) % 10, 3)
-            }
+            else{}
         }
         /**
          * show or hide dot point. 
