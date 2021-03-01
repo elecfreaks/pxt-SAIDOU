@@ -583,7 +583,7 @@ namespace Octopus {
                         this.showbit(Math.idiv(num, 10) % 10, 2)  
                         negativedp = 1
                         if(num > 99){
-                            this.showbit(Math.idiv(num, 10) % 10, 3)  
+                            this.showbit(Math.idiv(num, 100) % 10, 3)  
                             negativedp = 0
                         }
                     }
