@@ -715,6 +715,7 @@ namespace Octopus {
         //% parts="neopixel" subcategory=Display group="Neopixel"
         setPixelColor(pixeloffset: number, rgb: number): void {
             this.setPixelRGB(pixeloffset >> 0, rgb >> 0);
+            this.show();
         }
 
         /**
@@ -749,6 +750,7 @@ namespace Octopus {
         //% parts="neopixel" subcategory=Display group="Neopixel"
         setBrightness(brightness: number): void {
             this.brightness = brightness & 0xff;
+            this.show();
         }
 
         /**
@@ -786,6 +788,7 @@ namespace Octopus {
             offset = offset >> 0;
             const stride = this._mode === NeoPixelMode.RGBW ? 4 : 3;
             this.buf.shift(-offset * stride, this.start * stride, this._length * stride)
+            this.show();
         }
 
         /**
@@ -800,6 +803,7 @@ namespace Octopus {
             offset = offset >> 0;
             const stride = this._mode === NeoPixelMode.RGBW ? 4 : 3;
             this.buf.rotate(-offset * stride, this.start * stride, this._length * stride)
+            this.show();
         }
 
         /**
