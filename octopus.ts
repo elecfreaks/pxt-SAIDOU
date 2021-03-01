@@ -575,6 +575,7 @@ namespace Octopus {
         showNumber(num: number) {
             let negativedp = 2
             if(num != this.lastnum){
+                this.clear()
                 this.lastnum = num
                 if (num < 0) {
                     num = -num
