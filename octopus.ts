@@ -632,6 +632,7 @@ namespace Octopus {
         //% blockId="TM1637_clear" block="clear display %display"
         //% subcategory=Display group="7-Seg 4-Dig LED Nixietube" color=#EA5532
         clear() {
+            this.lastnum=null
             for (let i = 0; i < this.count; i++) {
                 this._dat(i, 0)
                 this.buf[i] = 0
