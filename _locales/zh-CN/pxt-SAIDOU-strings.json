@@ -47,7 +47,7 @@
   "Octopus.rgb|block": "RGB（红%red|绿%green|蓝%blue|）",
   "Octopus.showUserNumber|block": "OLED 第 %line 行|显示数字 %n",
   "Octopus.showUserText|block": "OLED 第 %line 行|显示文本 %text",
-  "Octopus.tm1637Create|block": "连接至 |DIO %UserPin_dio CLK %UserPin_clk 的7段4位数码管",
+  "Octopus.tm1637Create|block": "连接7段4位数码管至 |DIO %UserPin_dio CLK %UserPin_clk",
   "Octopus.trackingSensor|block": "两路巡线传感器 左:%UserPin 右:%UserPin_r 状态 %state",
   "Octopus.trimpotSensor|block": "电位器 %UserPin 模拟值(0~1023)",
   "Octopus.ultrasoundSensor|block": "超声波传感器 %UserPin 距离 %distance_unit",
