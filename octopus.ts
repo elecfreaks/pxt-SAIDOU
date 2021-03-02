@@ -369,7 +369,7 @@ namespace Octopus {
     }
     /**
     * get water level value (0~100)
-    * @param waterlevelpin describe parameter here, eg: AnalogPin.P1
+    * @param UserPin describe parameter here, eg: AnalogPin.P1
     */
     //% blockId="readwaterLevel" block="Water level sensor %UserPin value(0~100%)"
     //% UserPin.fieldEditor="gridpicker"
