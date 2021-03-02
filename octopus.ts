@@ -368,7 +368,7 @@ namespace Octopus {
         } else return false;
     }
     /**
-    * get water level value (0~100)
+    * TODO: get water level value (0~100)
     * @param UserPin describe parameter here, eg: AnalogPin.P1
     */
     //% blockId="readwaterLevel" block="Water level sensor %UserPin value(0~100%)"
@@ -391,7 +391,7 @@ namespace Octopus {
         return Math.round(waterlevel)
     }
     /**
-    * toggle Relay
+    * TODO: toggle Relay
     * @param UserPin sensor port, eg: DigitalPin.P1
     */
     //% blockId=Relay block="Relay %UserPin toggle to %Relaystate"
@@ -410,6 +410,9 @@ namespace Octopus {
                 break;
         }
     }
+    /**
+    * TODO: Clear OLED display
+    */
     //% block="clear display" color=#00B1ED
     //% subcategory=Display group="OLED"
     export function oledClear() {
@@ -426,6 +429,9 @@ namespace Octopus {
         //oledcmd(DISPLAY_ON);    //display on
         setText(0, 0);
     }
+    /**
+    * TODO: Display a row of numbers
+    */
     //% line.min=1 line.max=8 line.defl=2 
     //% n.defl=20201225
     //% block="OLED show line %line|number %n"
@@ -437,6 +443,9 @@ namespace Octopus {
         }
         showUserText(line, "" + n)
     }
+    /**
+    * TODO: Display a row of Texts
+    */
     //% line.min=1 line.max=8 line.defl=1
     //% text.defl="Hello,ELECFREAKS"
     //% block="OLED show line %line|text %text"
@@ -459,7 +468,7 @@ namespace Octopus {
             putChar(" ");
         }
     }
-/**
+    /**
    * Create a new driver Grove - 4-Digit Display
    * @param clkPin value of clk pin number
    * @param dataPin value of data pin number
