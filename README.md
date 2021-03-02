@@ -16,20 +16,21 @@ You can visit [SAIDOU](https://www.saidou42.com) For hardware packages and more.
 ```JavaScript
 
 input.onButtonPressed(Button.A, function () {
-    neZha.setMotorSpeed(neZha.MotorList.M1, 100)
-    neZha.setMotorSpeed(neZha.MotorList.M2, 100)
-    neZha.setMotorSpeed(neZha.MotorList.M3, 100)
-    neZha.setMotorSpeed(neZha.MotorList.M4, 100)
-})
-input.onButtonPressed(Button.B, function () {
-    neZha.setServoAngel(neZha.ServoList.S1, 119)
-    neZha.setServoSpeed(neZha.ServoList.S2, -58)
+    WuKong.setAllMotor(100, -100)
 })
 input.onButtonPressed(Button.AB, function () {
-    neZha.stopAllMotor()
+    WuKong.stopAllMotor()
 })
-basic.forever(function () {
-	
+input.onButtonPressed(Button.B, function () {
+    WuKong.setServoAngel(wuKong.ServoList.S0, 360)
+    WuKong.setServoAngel(wuKong.ServoList.S2, 180)
+    WuKong.setServoAngel(wuKong.ServoList.S4, 90)
+    WuKong.setServoAngel(wuKong.ServoList.S6, 0)
+})
+basic.showIcon(IconNames.Heart)
+WuKong.setLightMode(wuKong.LightMode.BREATH)
+Octopus.buttonEvent(DigitalPin.P1, Octopus.ButtonType.down, function () {
+    Octopus.showUserText(1, "Hello, SaiDou.")
 })
 
 ```
