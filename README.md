@@ -1,6 +1,6 @@
 ![](https://img.shields.io/badge/Plantfrom-Micro%3Abit-red) ![](https://img.shields.io/travis/com/elecfreaks/pxt-SAIDOU) ![](https://img.shields.io/github/v/release/elecfreaks/pxt-SAIDOU) ![](https://img.shields.io/github/last-commit/elecfreaks/pxt-SAIDOU) ![](https://img.shields.io/github/languages/top/elecfreaks/pxt-SAIDOU) ![](https://img.shields.io/github/issues/elecfreaks/pxt-SAIDOU) ![](https://img.shields.io/github/license/elecfreaks/pxt-SAIDOU) 
 
-# SAIDOU Package
+# 赛豆Makecode扩展包 SAIDOU Package
 
 ![](/SAIDOU.png/)
 
