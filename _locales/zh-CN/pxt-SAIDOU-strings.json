@@ -90,7 +90,7 @@
   "WuKong.mecanumSpin|block": "设置麦克纳姆轮小车向 %Turn 旋转 速度为 %speed",
   "WuKong.mecanumStop|block": "麦克纳姆轮小车停止",
   "WuKong.mecanumWheel|block": "设置麦克纳姆轮|左前 %LeftFront|左后 %LeftRear|右前 %RightFront|右后 %RightRear",
-  "WuKong.setAllMotor|block": "设置电机M1的速度为 %m1speed 电机M2的 速度为 %m2speed",
+  "WuKong.setAllMotor|block": "设置电机 M1 的速度为 %m1speed 电机 M2 的速度为 %m2speed",
   "WuKong.setLightMode|block": "设置氛围灯模式 %mode",
   "WuKong.setMotorSpeed|block": "设置电机 %motor 速度为 %speed",
   "WuKong.setServoAngel|block": "设置舵机 %servo 角度为 %angle",
