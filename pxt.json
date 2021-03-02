@@ -11,7 +11,9 @@
         "README.md",
         "main.ts",
         "octopus.ts",
-        "sendBuffer.asm"
+        "sendBuffer.asm",
+        "_locales/zh-CN/pxt-SAIDOU-strings.json",
+        "_locales/zh-CN/pxt-SAIDOU-jsdoc-strings.json"
     ],
     "testFiles": [
         "test.ts"
