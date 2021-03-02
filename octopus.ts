@@ -392,6 +392,7 @@ namespace Octopus {
     }
     /**
     * toggle Relay
+    * @param UserPin sensor port, eg: DigitalPin.P1
     */
     //% blockId=Relay block="Relay %UserPin toggle to %Relaystate"
     //% UserPin.fieldEditor="gridpicker"
