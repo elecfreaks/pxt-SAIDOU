@@ -23,7 +23,6 @@
   "Octopus.Strip.range|block": "%strip| 从像素%start|开始 长度%length|颗LED",
   "Octopus.Strip.rotate|block": "%strip|循环像素 偏移量%offset",
   "Octopus.Strip.setBrightness|block": "%strip|设置亮度为 %brightness",
-  "Octopus.Strip.setPixelColor|block": "%string|设置像素点 （坐标）x %x|y %y|颜色 %rgb=neopixel_colors",
   "Octopus.Strip.shift|block": "%strip|移动像素 偏移量%offset",
   "Octopus.Strip.showColor|block": "%strip|显示颜色%rgb=neopixel_colors",
   "Octopus.Strip.showRainbow|block": "%strip|显示彩虹特效 （色相）从%startHue|到%endHue",
