@@ -746,12 +746,8 @@ namespace Octopus {
          * @param pixeloffset position of the NeoPixel in the strip
          * @param rgb RGB color of the LED
          */
-        //% blockId="neopixel_set_pixel_color" block="%strip|set pixel color at %pixeloffset|to %rgb=neopixel_colors"
-        //% weight=80 color=#EA5532
-        //% parts="neopixel" subcategory=Display group="Neopixel"
-        setPixelColor(pixeloffset: number, rgb: number): void {
+        private setPixelColor(pixeloffset: number, rgb: number): void {
             this.setPixelRGB(pixeloffset >> 0, rgb >> 0);
-            this.show();
         }
 
         /**
@@ -786,7 +782,6 @@ namespace Octopus {
         //% parts="neopixel" subcategory=Display group="Neopixel"
         setBrightness(brightness: number): void {
             this.brightness = brightness & 0xff;
-            this.show();
         }
 
         /**
