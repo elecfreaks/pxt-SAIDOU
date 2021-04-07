@@ -379,7 +379,7 @@ namespace Octopus {
         let rawData = 0
         let fitData = 0
         rawData = pins.analogReadPin(UserPin)
-        rawData = Math.round(rawData)
+        
         if(rawData <= 300){
             fitData = Math.map(rawData, 0, 300, 0, 25)
         }
@@ -389,7 +389,7 @@ namespace Octopus {
         else if(rawData > 400){
             fitData = Math.map(rawData, 400, 440, 75, 100)
         }
-        return fitData
+        return Math.round(fitData)
     }
     /**
     * TODO: toggle Relay
