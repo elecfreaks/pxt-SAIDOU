@@ -377,17 +377,18 @@ namespace Octopus {
     //% subcategory=Sensor color=#E2C438 group="Analog"
     export function waterLevel(UserPin: AnalogPin): number {
         let rawData = 0
+        let fitData = 0
         rawData = pins.analogReadPin(UserPin)
         if(rawData <= 300){
-            return Math.map(rawData, 0, 300, 0, 25)
+            fitData = Math.map(rawData, 0, 300, 0, 25)
         }
         else if(rawData > 300 && rawData <= 400){
-            return Math.map(rawData, 300, 400, 25, 75)
+            fitData = Math.map(rawData, 300, 400, 25, 75)
         }
         else if(rawData > 400){
-            return Math.map(rawData, 400, 450, 75, 100)
+            fitData = Math.map(rawData, 400, 450, 75, 100)
         }
-        return 0
+        return Math.round(fitData)
     }
     /**
     * TODO: toggle Relay
