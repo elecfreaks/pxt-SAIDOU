@@ -386,9 +386,9 @@ namespace Octopus {
             fitData = Math.map(rawData, 300, 400, 25, 75)
         }
         else if(rawData > 400){
-            fitData = Math.map(rawData, 400, 450, 75, 100)
+            fitData = Math.map(rawData, 400, 440, 75, 100)
         }
-        return Math.round(fitData)
+        return Math.trunc(fitData)
     }
     /**
     * TODO: toggle Relay
