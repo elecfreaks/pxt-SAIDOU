@@ -50,7 +50,7 @@
   "Octopus.trackingSensor|block": "两路巡线传感器 左:%UserPin 右:%UserPin_r 状态 %state",
   "Octopus.trimpotSensor|block": "电位器 %UserPin 模拟值(0~1023)",
   "Octopus.ultrasoundSensor|block": "超声波传感器 %UserPin 距离 %distance_unit",
-  "Octopus.waterLevel|block": "水位传感器 %UserPin 水位(0~100\\%)",
+  "Octopus.waterLevel|block": "水位传感器 %UserPin 水位值",
   "Octopus|block": "八爪鱼电子积木",
   "WuKong.LightMode.BREATH|block": "呼吸灯",
   "WuKong.LightMode.OFF|block": "关闭",
