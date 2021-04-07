@@ -371,7 +371,7 @@ namespace Octopus {
     * TODO: get water level value (0~100)
     * @param UserPin describe parameter here, eg: AnalogPin.P1
     */
-    //% blockId="readwaterLevel" block="Water level sensor %UserPin value"
+    //% blockId="readwaterLevel" block="Water level sensor %UserPin value(0~1023)"
     //% UserPin.fieldEditor="gridpicker"
     //% UserPin.fieldOptions.columns=2
     //% subcategory=Sensor color=#E2C438 group="Analog"
