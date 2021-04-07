@@ -388,7 +388,7 @@ namespace Octopus {
         else if(rawData > 400){
             fitData = Math.map(rawData, 400, 440, 75, 100)
         }
-        return Math.trunc(fitData)
+        return fitData
     }
     /**
     * TODO: toggle Relay
