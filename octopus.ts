@@ -379,7 +379,7 @@ namespace Octopus {
         let voltage = 0, waterlevel = 0;
         voltage = pins.map(
             pins.analogReadPin(UserPin),
-            50,
+            0,
             600,
             0,
             100
