@@ -379,6 +379,7 @@ namespace Octopus {
         let rawData = 0
         let fitData = 0
         rawData = pins.analogReadPin(UserPin)
+        rawData = Math.round(rawData)
         if(rawData <= 300){
             fitData = Math.map(rawData, 0, 300, 0, 25)
         }
