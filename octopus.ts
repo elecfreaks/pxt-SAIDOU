@@ -368,28 +368,17 @@ namespace Octopus {
         } else return false;
     }
     /**
-    * TODO: get water level value (0~100)
+    * TODO: get water level value (0~1023)
     * @param UserPin describe parameter here, eg: AnalogPin.P1
     */
-    //% blockId="readwaterLevel" block="Water level sensor %UserPin value(0~100%)"
+    //% blockId="readwaterLevel" block="Water level sensor %UserPin value(0~1023)"
     //% UserPin.fieldEditor="gridpicker"
     //% UserPin.fieldOptions.columns=2
     //% subcategory=Sensor color=#E2C438 group="Analog"
     export function waterLevel(UserPin: AnalogPin): number {
         let rawData = 0
-        let fitData = 0
         rawData = pins.analogReadPin(UserPin)
-        
-        if(rawData <= 300){
-            fitData = Math.map(rawData, 0, 300, 0, 25)
-        }
-        else if(rawData > 300 && rawData <= 400){
-            fitData = Math.map(rawData, 300, 400, 25, 75)
-        }
-        else if(rawData > 400){
-            fitData = Math.map(rawData, 400, 440, 75, 100)
-        }
-        return Math.round(fitData)
+        return Math.round(rawData)
     }
     /**
     * TODO: toggle Relay
