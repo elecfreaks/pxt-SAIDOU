@@ -40,7 +40,7 @@
   "Octopus.colors|block": "%color",
   "Octopus.create|block": "引脚%UserPin|初始化灯带|%numleds|颗LED（模式%mode|）",
   "Octopus.hsl|block": "色相 %h|饱和度 %s|亮度 %l",
-  "Octopus.lightSensor|block":"光线传感器 %UserPin 光线强度(lux)",
+  "Octopus.lightSensor|block":"光线传感器 %UserPin 光线强度(0~1023)",
   "Octopus.motorFan|block": "电机风扇 %UserPin 切换至 $fanstate || 速度 %speed \\%",
   "Octopus.oledClear|block": "清除显示",
   "Octopus.rgb|block": "RGB（红%red|绿%green|蓝%blue|）",

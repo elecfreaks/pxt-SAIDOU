@@ -268,24 +268,12 @@ namespace Octopus {
     * TODO: get light intensity(lux)
     * @param UserPin AnalogPin, eg: AnalogPin.P1
     */
-    //% blockId="lightSensor" block="Light sensor %UserPin light intensity(lux)"
+    //% blockId="lightSensor" block="Light sensor %UserPin light (0~1023)"
     //% subcategory=Sensor color=#E2C438 group="Analog"
     export function lightSensor(UserPin: AnalogPin): number {
-        let voltage = 0, lightintensity = 0;
-        for (let index = 0; index < 100; index++) {
-            voltage = voltage + pins.analogReadPin(UserPin)
-        }
-        voltage = voltage / 100
-        if (voltage < 200) {
-            voltage = Math.map(voltage, 45, 200, 0, 1600)
-        }
-        else {
-            voltage = Math.map(voltage, 200, 1023, 1600, 14000)
-        }
-        if(voltage < 0){
-            voltage = 0
-        }
-        return Math.round(voltage)
+        let light = 0
+        light = pins.analogReadPin(UserPin)
+        return Math.round(light)
     }
     /**
     * TODO: get distance
